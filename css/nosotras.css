@@ -1,0 +1,39 @@
+/* Nosotras: alternating text and portrait blocks. */
+
+.about {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.about__block {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.about__block--reverse {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+.about__text {
+    flex: 3;
+}
+
+.about__image {
+    flex: 2;
+    aspect-ratio: 2 / 3;
+    border-radius: 50%;
+}
+
+.about__subtitle {
+    color: var(--color-primary);
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.about__paragraph {
+    margin-top: var(--space-1);
+    line-height: 1.6;
+}

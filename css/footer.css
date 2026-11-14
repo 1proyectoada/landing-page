@@ -1,0 +1,60 @@
+/* Footer: purple contact card, social links, and legal links. */
+
+.footer {
+    padding-block: var(--space-4) var(--space-5);
+}
+
+.footer__card {
+    padding: var(--space-4);
+    background-color: var(--color-primary);
+    border-radius: var(--radius-block);
+    color: var(--color-white);
+}
+
+.footer__logo {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.footer__tagline {
+    margin-top: var(--space-2);
+    line-height: 1.6;
+}
+
+.footer__socials {
+    display: flex;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+}
+
+.social-link {
+    display: grid;
+    place-items: center;
+    width: var(--tap-target);
+    height: var(--tap-target);
+    background-color: var(--color-white);
+    border-radius: 50%;
+    color: var(--color-primary);
+    font-size: 1.25rem;
+}
+
+.footer__legal {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: var(--space-3);
+    font-size: 0.875rem;
+}
+
+.footer__legal a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap-target);
+}
+
+.footer__legal a:hover,
+.footer__legal a:focus {
+    text-decoration: underline;
+}

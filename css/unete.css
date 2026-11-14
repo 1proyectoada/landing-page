@@ -1,0 +1,66 @@
+/* Únete: three overlapping rotated cards. */
+
+/* Rotation can extend past the container, so clip the section. */
+.section--unete {
+    overflow-x: clip;
+}
+
+.join-cards {
+    display: flex;
+    flex-direction: column;
+    padding-block: var(--space-2);
+}
+
+.join-card {
+    padding: var(--space-4);
+    border-radius: var(--radius-block);
+    text-align: center;
+}
+
+.join-card + .join-card {
+    margin-top: calc(var(--space-3) * -1);
+}
+
+.join-card--primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    transform: rotate(-3deg);
+}
+
+.join-card--lavender {
+    background-color: var(--color-lavender);
+    color: var(--color-black);
+    transform: rotate(2deg);
+}
+
+.join-card--accent {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    font-size: 1.25rem;
+    font-weight: 700;
+    transform: rotate(-2deg);
+}
+
+.join-card__title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.join-card__text {
+    margin-top: var(--space-2);
+    line-height: 1.6;
+}
+
+.join-card__button {
+    min-height: var(--tap-target);
+    margin-top: var(--space-3);
+    padding: 0 var(--space-3);
+    background-color: var(--color-white);
+    border: 2px solid var(--color-black);
+    border-radius: var(--radius-pill);
+    color: var(--color-black);
+    font-weight: 700;
+    cursor: pointer;
+}

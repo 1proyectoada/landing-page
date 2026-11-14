@@ -1,0 +1,52 @@
+/* Shared section scaffolding used across the page. */
+
+/* Keep anchor targets clear of the sticky header. */
+.section,
+.hero,
+.footer {
+    scroll-margin-top: calc(var(--header-height) + var(--space-2));
+}
+
+.section {
+    padding-block: var(--space-5);
+}
+
+.section-title {
+    display: inline-block;
+    position: relative;
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-1);
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: var(--space-5);
+    height: 0.25rem;
+    background-color: var(--color-primary);
+    border-radius: var(--radius-pill);
+}
+
+.section-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+}
+
+.section-heading .section-title {
+    margin-bottom: 0;
+}
+
+/* Shared by workshop, testimonial, and about image blocks. */
+.image-placeholder {
+    background-color: var(--color-lavender);
+}

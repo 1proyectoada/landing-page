@@ -1,0 +1,25 @@
+/* Talleres: stacked workshop cards. */
+
+.workshops {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.workshop-card__image {
+    aspect-ratio: 16 / 10;
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-card);
+}
+
+.workshop-card__title {
+    margin-top: var(--space-2);
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.workshop-card__text {
+    margin-top: var(--space-1);
+    line-height: 1.6;
+}

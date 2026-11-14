@@ -1,0 +1,61 @@
+/* Resultados: 2x2 stats grid with cross lines and a center star. */
+
+/* The cross lines sit behind the stats; the star covers the crossing. */
+.stats {
+    position: relative;
+}
+
+.stats::before,
+.stats::after {
+    content: "";
+    position: absolute;
+    background-color: var(--color-lavender-border);
+}
+
+.stats::before {
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+}
+
+.stats::after {
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+}
+
+.stats__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat__number {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.stat__label {
+    margin-top: var(--space-1);
+}
+
+.stats__star {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    color: var(--color-primary);
+    font-size: 3rem;
+}

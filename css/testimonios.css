@@ -1,0 +1,64 @@
+/* Testimonios: horizontal scroll-snap carousel. */
+
+.carousel-controls {
+    display: flex;
+    gap: var(--space-1);
+}
+
+.carousel-button {
+    display: grid;
+    place-items: center;
+    width: var(--tap-target);
+    height: var(--tap-target);
+    padding: 0;
+    background-color: var(--color-primary);
+    border: 0;
+    border-radius: 50%;
+    color: var(--color-white);
+    font-size: 1.25rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.testimonials {
+    display: flex;
+    gap: var(--space-2);
+    overflow-x: auto;
+    padding-bottom: var(--space-1);
+    scroll-snap-type: x mandatory;
+}
+
+.testimonial-card {
+    flex: 0 0 85%;
+    padding: var(--space-20);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray-border);
+    border-radius: var(--radius-card);
+    scroll-snap-align: start;
+}
+
+.testimonial-card--featured {
+    border: 2px solid var(--color-black);
+}
+
+.testimonial-card__name {
+    color: var(--color-primary);
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.testimonial-card__role {
+    color: var(--color-primary);
+    font-size: 0.875rem;
+}
+
+.testimonial-card__quote {
+    margin-top: var(--space-1);
+    line-height: 1.6;
+}
+
+.testimonial-card__image {
+    margin-top: var(--space-2);
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-card);
+}

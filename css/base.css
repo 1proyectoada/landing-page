@@ -1,0 +1,102 @@
+/* Base: reset, design tokens, and page-wide defaults. */
+
+/* Small reset: keeps sizing predictable across browsers. */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+:root {
+    /* Colors */
+    --color-primary: #7447e1;
+    --color-accent: #8c52ff;
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-lavender: #e6dcff;
+    --color-lavender-border: #c9b8ff;
+    --color-gray-border: #d9d9d9;
+
+    /* Fonts */
+    --font-heading: "League Spartan", sans-serif;
+    --font-body: "Montserrat", sans-serif;
+
+    /* Spacing scale: 8, 16, 24, 32, 48, 64px */
+    --space-1: 0.5rem;
+    --space-2: 1rem;
+    --space-3: 1.5rem;
+    --space-4: 2rem;
+    --space-5: 3rem;
+    --space-6: 4rem;
+    --space-7: 5rem;
+    --space-20: 1.25rem;
+
+    /* Layout */
+    --content-max-width: 37.5rem;
+    --header-height: 4rem;
+    --tap-target: 2.75rem;
+    --tap-target-large: 3rem;
+    --radius-card: 1rem;
+    --radius-block: 1.5rem;
+    --radius-pill: 999px;
+    --shadow-header: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Base */
+body {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.container {
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+    padding-inline: var(--space-20);
+}
+
+/* The star is repeated inline because IDs are reserved for in-page anchors. */
+.star {
+    display: block;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+    outline: 3px solid var(--color-black);
+    outline-offset: 3px;
+}
