@@ -40,10 +40,6 @@
     scroll-snap-align: start;
 }
 
-.testimonial-card--featured {
-    border: 2px solid var(--color-black);
-}
-
 .testimonial-card__name {
     color: var(--color-primary);
     font-size: 1.125rem;

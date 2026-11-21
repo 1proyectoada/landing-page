@@ -67,7 +67,11 @@ button {
     --radius-card: 1rem;
     --radius-block: 1.5rem;
     --radius-pill: 999px;
+    --card-border-width: 10px;
+    /* Inner curve matches the card's outer radius minus its white border. */
+    --radius-card-inner: calc(var(--radius-block) - var(--card-border-width));
     --shadow-header: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.14);
 }
 
 /* Base */
