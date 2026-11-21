@@ -2,7 +2,7 @@
 
 .marquee {
     overflow: hidden;
-    padding-block: var(--space-4);
+    padding-block: var(--space-5);
     color: var(--color-primary);
     font-size: 1.25rem;
     font-weight: 600;

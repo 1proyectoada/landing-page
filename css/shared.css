@@ -8,7 +8,9 @@
 }
 
 .section {
+    margin-bottom: var(--space-6);
     padding-block: var(--space-7);
+    padding-top: var(--space-3);
 }
 
 .section-title {
