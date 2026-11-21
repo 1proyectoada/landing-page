@@ -1,4 +1,4 @@
-/* Únete: three overlapping rotated cards. */
+/* Únete: three interlocking puzzle cards. */
 
 /* Rotation can extend past the container, so clip the section. */
 .section--unete {
@@ -6,39 +6,89 @@
 }
 
 .join-cards {
+    --knob-radius: 32px;
+    --notch-radius: 40px;
+    --piece-gap: var(--space-2);
+
     display: flex;
     flex-direction: column;
-    padding-block: var(--space-2);
+    /* Leave room for the first connector above the stack. */
+    padding-block-start: var(--knob-radius);
+    padding-block-end: var(--space-2);
 }
 
 .join-card {
-    padding: var(--space-4);
-    border-radius: var(--radius-block);
-    text-align: center;
+    --card-tilt: 0deg;
+    position: relative;
+    transform: rotate(var(--card-tilt));
 }
 
+/* A small reveal between bodies; the notch shifts down to keep the interlock. */
 .join-card + .join-card {
-    margin-top: calc(var(--space-3) * -1);
+    margin-top: var(--piece-gap);
+}
+
+/* Top connector is a true semicircle centered on the card edge, like the side tabs. */
+.join-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: calc(var(--knob-radius) * 2);
+    height: calc(var(--knob-radius) * 2);
+    background-color: var(--card-bg);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Side tabs are decorative; clipping at the screen edge is acceptable. */
+.join-card::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: calc(var(--knob-radius) * 2);
+    height: calc(var(--knob-radius) * 2);
+    background-color: var(--card-bg);
+    border-radius: 50%;
+}
+
+.join-card__body {
+    padding: var(--space-4);
+    /* Keep the button clear of the notch cut into the bottom edge. */
+    padding-bottom: calc(var(--notch-radius) + var(--space-2));
+    background-color: var(--card-bg);
+    border-radius: var(--radius-block);
+    text-align: center;
+    /* A transparent circle becomes a hole; black is opaque in the mask. */
+    -webkit-mask: radial-gradient(circle var(--notch-radius) at 50% calc(100% + var(--piece-gap)), transparent 98%, var(--color-black) 100%);
+    mask: radial-gradient(circle var(--notch-radius) at 50% calc(100% + var(--piece-gap)), transparent 98%, var(--color-black) 100%);
 }
 
 .join-card--primary {
-    background-color: var(--color-primary);
+    --card-bg: var(--color-primary);
     color: var(--color-white);
-    transform: rotate(-3deg);
 }
 
 .join-card--lavender {
-    background-color: var(--color-lavender);
+    --card-bg: var(--color-lavender);
     color: var(--color-black);
-    transform: rotate(2deg);
 }
 
 .join-card--accent {
-    background-color: var(--color-accent);
+    --card-bg: var(--color-accent);
     color: var(--color-white);
-    font-size: 1.25rem;
-    font-weight: 700;
-    transform: rotate(-2deg);
+}
+
+/* Outer pieces get a left tab; the middle piece gets a right tab. */
+.join-card--primary::after,
+.join-card--accent::after {
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+.join-card--lavender::after {
+    right: 0;
+    transform: translate(50%, -50%);
 }
 
 .join-card__title {
@@ -58,9 +108,9 @@
     margin-top: var(--space-3);
     padding: 0 var(--space-3);
     background-color: var(--color-white);
-    border: 2px solid var(--color-black);
+    border: 0;
     border-radius: var(--radius-pill);
-    color: var(--color-black);
+    color: var(--color-primary);
     font-weight: 700;
     cursor: pointer;
 }

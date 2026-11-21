@@ -1,5 +1,12 @@
 /* FAQ: native details/summary accordion. */
 
+/* Closed items are muted so the open one stands out. */
+.faq {
+    background-color: var(--color-lavender);
+    interpolate-size: allow-keywords;
+    transition: background-color 0.35s ease;
+}
+
 .faq-list {
     overflow: hidden;
     border: 2px solid var(--color-primary);
@@ -10,6 +17,26 @@
     border-top: 1px solid var(--color-primary);
 }
 
+/* The open item flips to white with full-strength text. */
+.faq[open] {
+    background-color: var(--color-white);
+}
+
+/* Animate the native details content so the answer reveals gradually. */
+.faq::details-content {
+    block-size: 0;
+    overflow: hidden;
+    content-visibility: hidden;
+    transition:
+        block-size 0.35s ease,
+        content-visibility 0.35s allow-discrete;
+}
+
+.faq[open]::details-content {
+    block-size: auto;
+    content-visibility: visible;
+}
+
 .faq__summary {
     display: flex;
     align-items: center;
@@ -17,9 +44,15 @@
     gap: var(--space-2);
     min-height: var(--tap-target-large);
     padding: var(--space-2);
+    color: var(--color-faq-muted);
     font-weight: 600;
     cursor: pointer;
     list-style: none;
+    transition: color 0.35s ease;
+}
+
+.faq[open] .faq__summary {
+    color: var(--color-black);
 }
 
 /* Remove the browser's default disclosure marker. */
@@ -43,14 +76,25 @@
     transform: rotate(45deg);
 }
 
+/* Answer text sits directly on the open card, with no inner panel. */
 .faq__answer {
     margin: 0 var(--space-2) var(--space-2);
     padding: var(--space-2);
-    background-color: var(--color-lavender);
+    color: var(--color-black);
     border-radius: var(--radius-card);
     line-height: 1.6;
 }
 
 .faq__answer p + p {
     margin-top: var(--space-1);
+}
+
+/* Respect users who prefer less motion. */
+@media (prefers-reduced-motion: reduce) {
+
+    .faq,
+    .faq__summary,
+    .faq::details-content {
+        transition: none;
+    }
 }

@@ -44,6 +44,8 @@ button {
     --color-lavender: #e6dcff;
     --color-lavender-border: #c9b8ff;
     --color-gray-border: #d9d9d9;
+    /* Faded black stays readable on lavender closed FAQ items. */
+    --color-faq-muted: color-mix(in srgb, var(--color-black) 60%, transparent);
 
     /* Fonts */
     --font-heading: "League Spartan", sans-serif;
