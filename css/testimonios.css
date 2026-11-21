@@ -15,9 +15,12 @@
     border: 0;
     border-radius: 50%;
     color: var(--color-white);
-    font-size: 1.25rem;
-    font-weight: 700;
     cursor: pointer;
+}
+
+.carousel-button .icon {
+    width: 1.25rem;
+    height: 1.25rem;
 }
 
 .testimonials {

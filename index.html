@@ -58,12 +58,18 @@
     <main>
         <section id="inicio" class="hero">
             <div class="container hero__content">
-                <h1 class="hero__title"><span class="hero__title-primary">proyecto</span> <span class="hero__title-dark">ada</span></h1>
+                <h1 class="hero__title">
+                    <img class="hero__logo" src="images/logo.png" alt="proyecto ada" width="3000" height="1688" />
+                </h1>
                 <p class="hero__subtitle">Inspiramos y apoyamos a chicas en STEM para que rompan barreras y conquisten la tecnología.</p>
                 <div class="hero__cta-wrap">
                     <a class="hero__cta" href="#talleres">
                         <span>Ver talleres disponibles</span>
-                        <span class="hero__cta-arrow" aria-hidden="true">&gt;</span>
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             aria-hidden="true">
+                          <path d="M5 12h14M13 6l6 6-6 6" />
+                        </svg>
                     </a>
                 </div>
             </div>
@@ -178,8 +184,20 @@
                     <h2 class="section-title">TESTIMONIOS</h2>
                     <div class="carousel-controls">
                         <!-- TODO: connect these buttons with JS later. -->
-                        <button type="button" class="carousel-button" aria-label="Anterior">&lt;</button>
-                        <button type="button" class="carousel-button" aria-label="Siguiente">&gt;</button>
+                        <button type="button" class="carousel-button" aria-label="Anterior">
+                            <svg class="icon icon--back" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 aria-hidden="true">
+                                <path d="M5 12h14M13 6l6 6-6 6" />
+                            </svg>
+                        </button>
+                        <button type="button" class="carousel-button" aria-label="Siguiente">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 aria-hidden="true">
+                                <path d="M5 12h14M13 6l6 6-6 6" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
                 <div class="testimonials">

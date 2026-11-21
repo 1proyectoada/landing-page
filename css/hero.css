@@ -1,6 +1,8 @@
 /* Hero: page title, subtitle, and primary call to action. */
 
 .hero {
+    margin-top: var(--space-1);
+    margin-bottom: var(--space-3);
     padding-block: var(--space-7);
     text-align: center;
 }
@@ -12,34 +14,36 @@
 }
 
 .hero__title {
-    font-family: var(--font-heading);
-    font-size: 2.5rem;
-    font-weight: 700;
-    line-height: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
-.hero__title-primary {
-    color: var(--color-primary);
-}
-
-.hero__title-dark {
-    color: var(--color-black);
+/* The PNG has transparent bands above and below the wordmark. Cropping
+   with object-fit keeps the asset untouched and removes that empty space. */
+.hero__logo {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 21rem;
+    aspect-ratio: 2811 / 530;
+    object-fit: cover;
+    object-position: center;
 }
 
 .hero__subtitle {
     max-width: 30ch;
     margin-top: var(--space-2);
     color: var(--color-primary);
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     line-height: 1.5;
 }
 
 .hero__cta-wrap {
     margin-top: var(--space-4);
+    margin-bottom: var(--space-7);
     padding: var(--space-1);
-    background-color: var(--color-lavender);
-    border-radius: var(--radius-block);
 }
 
 .hero__cta {
@@ -48,21 +52,21 @@
     justify-content: space-between;
     gap: var(--space-2);
     min-height: var(--tap-target-large);
-    padding: var(--space-1) var(--space-1) var(--space-1) var(--space-3);
-    background-color: var(--color-white);
-    border: 1px solid var(--color-black);
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-3);
+    background-color: var(--color-primary);
+    box-shadow: 0 0 40px 8px color-mix(in srgb, var(--color-primary) 40%, transparent);
     border-radius: var(--radius-pill);
-    color: var(--color-black);
+    color: var(--color-white);
     font-weight: 600;
 }
 
-.hero__cta-arrow {
-    display: grid;
-    place-items: center;
+/* Padding keeps the arrow visually centred inside the primary circle. */
+.hero__cta .icon {
+    display: block;
     width: 2rem;
     height: 2rem;
-    background-color: var(--color-primary);
+    padding: 0.4rem;
+    background-color: var(--color-white);
     border-radius: 50%;
-    color: var(--color-white);
-    font-weight: 700;
+    color: var(--color-primary);
 }
