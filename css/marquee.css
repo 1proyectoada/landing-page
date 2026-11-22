@@ -2,7 +2,7 @@
 
 :root {
     /* Trailing padding must match the gap, or the -50% loop has a jump. */
-    --marquee-gap: var(--space-5);
+    --marquee-gap: var(--space-4);
     /* Equal boxes keep very wide and compact logos visually balanced. */
     --marquee-logo-width: calc(var(--space-7) * 2);
     --marquee-logo-height: var(--space-7);

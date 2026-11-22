@@ -1,4 +1,4 @@
-/* Resultados: 2-column, 3-row stats grid with dividers and stars at crossings. */
+/* Resultados: 2-column, 2-row stats grid with a divider and star at the crossing. */
 
 /* Register the counter so the browser can interpolate whole numbers. */
 @property --count {
@@ -27,14 +27,12 @@
     z-index: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* Divider rows reuse the space the old row gaps occupied. */
-    grid-template-rows: auto var(--space-4) auto var(--space-4) auto;
+    /* Divider row reuses the space the old row gap occupied. */
+    grid-template-rows: auto var(--space-4) auto;
     grid-template-areas:
         "one two"
         "line1 line1"
-        "three four"
-        "line2 line2"
-        "five six";
+        "three four";
     column-gap: var(--space-4);
 }
 
@@ -62,31 +60,13 @@
     --target: 2;
 }
 
-.stat:nth-child(5) {
-    grid-area: five;
-    --target: 10;
-}
-
-.stat:nth-child(6) {
-    grid-area: six;
-    --target: 1;
-}
-
-/* Horizontal dividers sit in the empty rows between stat rows. */
-.stats__grid::before,
-.stats__grid::after {
+/* Horizontal divider sits in the empty row between the stat rows. */
+.stats__grid::before {
     content: "";
+    grid-area: line1;
     align-self: center;
     height: 1px;
     background-color: var(--color-lavender-border);
-}
-
-.stats__grid::before {
-    grid-area: line1;
-}
-
-.stats__grid::after {
-    grid-area: line2;
 }
 
 .stat__number {
@@ -104,17 +84,10 @@
 .stats__star {
     position: relative;
     z-index: 2;
+    grid-area: line1;
     place-self: center;
     color: var(--color-primary);
     font-size: 2rem;
-}
-
-.stats__star--first {
-    grid-area: line1;
-}
-
-.stats__star--second {
-    grid-area: line2;
 }
 
 /* Count up while the stat enters the viewport; plain numbers stay if unsupported. */
