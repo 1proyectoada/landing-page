@@ -55,7 +55,7 @@
     position: fixed;
     inset: 0;
     z-index: 1000;
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -63,10 +63,21 @@
     padding: var(--space-6) var(--space-4);
     background-color: var(--color-primary);
     color: var(--color-white);
+    /* Stay rendered so the overlay can animate in both directions; delaying
+       visibility keeps it on screen while the close animation plays. */
+    visibility: hidden;
+    pointer-events: none;
+    clip-path: circle(0 at 100% 0);
+    transition: visibility 0s linear 0.5s;
+    animation: menu-close 0.5s ease both;
 }
 
 .menu:target {
-    display: flex;
+    visibility: visible;
+    pointer-events: auto;
+    clip-path: circle(150% at 100% 0);
+    transition: visibility 0s;
+    animation: menu-open 0.5s ease both;
 }
 
 .menu__close {
@@ -99,4 +110,35 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.04em;
+}
+
+/* Opening grows from the top-right; closing shrinks to the bottom-left. */
+@keyframes menu-open {
+    from {
+        clip-path: circle(0 at 100% 0);
+    }
+
+    to {
+        clip-path: circle(150% at 100% 0);
+    }
+}
+
+@keyframes menu-close {
+    from {
+        clip-path: circle(150% at 100% 0);
+    }
+
+    to {
+        clip-path: circle(0 at 0 100%);
+    }
+}
+
+/* Respect users who prefer less motion; the menu snaps instead. */
+@media (prefers-reduced-motion: reduce) {
+
+    .menu,
+    .menu:target {
+        animation: none;
+        transition: none;
+    }
 }
