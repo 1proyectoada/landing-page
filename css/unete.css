@@ -9,6 +9,8 @@
     --knob-radius: 32px;
     --notch-radius: 40px;
     --piece-gap: var(--space-2);
+    /* How far each piece slides in from its side of the screen. */
+    --enter-offset: 6rem;
 
     display: flex;
     flex-direction: column;
@@ -19,6 +21,7 @@
 
 .join-card {
     --card-tilt: 0deg;
+    --enter-from: 0;
     position: relative;
     transform: rotate(var(--card-tilt));
 }
@@ -66,16 +69,21 @@
 
 .join-card--primary {
     --card-bg: var(--color-primary);
+    /* Positive offset starts on the right, so the piece slides left into place. */
+    --enter-from: var(--enter-offset);
     color: var(--color-white);
 }
 
 .join-card--lavender {
     --card-bg: var(--color-lavender);
+    /* Negative offset starts on the left, so the piece slides right into place. */
+    --enter-from: calc(var(--enter-offset) * -1);
     color: var(--color-black);
 }
 
 .join-card--accent {
     --card-bg: var(--color-accent);
+    --enter-from: var(--enter-offset);
     color: var(--color-white);
 }
 
@@ -113,4 +121,34 @@
     color: var(--color-primary);
     font-weight: 700;
     cursor: pointer;
+}
+
+/* Slide each piece in as it enters the viewport; static cards if unsupported. */
+@supports (animation-timeline: view()) {
+    .join-card {
+        animation: join-card-enter linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 40%;
+    }
+}
+
+/* translate composes with the card's rotate and the tabs' own transforms. */
+@keyframes join-card-enter {
+    from {
+        translate: var(--enter-from) 0;
+        opacity: 0;
+    }
+    to {
+        translate: 0 0;
+        opacity: 1;
+    }
+}
+
+/* Show the pieces at rest immediately when motion is reduced. */
+@media (prefers-reduced-motion: reduce) {
+    .join-card {
+        animation: none;
+        translate: 0 0;
+        opacity: 1;
+    }
 }
