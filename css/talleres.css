@@ -1,5 +1,10 @@
 /* Talleres: stacked workshop cards. */
 
+:root {
+    /* Reserved space keeps the section height steady until cards return. */
+    --workshops-empty-height: 27.5rem;
+}
+
 .workshops {
     display: flex;
     flex-direction: column;
@@ -71,4 +76,16 @@
 
 .workshop-card__button:hover {
     background-color: var(--color-accent);
+}
+
+/* Temporary empty state while the workshops are being prepared. */
+.workshops-empty {
+    display: grid;
+    place-items: center;
+    min-height: var(--workshops-empty-height);
+    padding: var(--space-4);
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: center;
 }

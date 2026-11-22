@@ -1,0 +1,49 @@
+/* Waves: reusable decorative line pattern for empty section corners. */
+
+:root {
+    /* Tune these together to resize, fade, or push the pattern out of view. */
+    --waves-width: 220px;
+    --waves-opacity: 1;
+    --waves-offset: -40px;
+    /* A separate vertical offset lets one section drop the pattern below its title. */
+    --waves-offset-y: var(--waves-offset);
+}
+
+.has-waves {
+    position: relative;
+    /* Keep the negative-z decoration behind this section's content only. */
+    isolation: isolate;
+    /* Clip sideways bleed without hiding card knobs that stick out vertically. */
+    overflow-x: clip;
+}
+
+.has-waves::before {
+    content: "";
+    position: absolute;
+    top: var(--waves-offset-y);
+    left: var(--waves-offset);
+    width: var(--waves-width);
+    /* Matches the square SVG viewBox so the layer has a real size. */
+    aspect-ratio: 1;
+    background: url("../images/pattern-waves.svg") no-repeat;
+    background-size: contain;
+    opacity: var(--waves-opacity);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Mirror both axes so the arcs enter from the bottom-right corner. */
+.waves-bottom-right::before {
+    top: auto;
+    left: auto;
+    right: var(--waves-offset);
+    bottom: var(--waves-offset-y);
+    transform: scaleX(-1) scaleY(-1);
+}
+
+/* Drop the talleres pattern just below its heading. */
+.waves-peek {
+    --waves-offset-y: 70px;
+}
+
+/* Add a @media (min-width: ...) block here later to raise --waves-width. */

@@ -1,29 +1,25 @@
-/* Resultados: 2x2 stats grid with cross lines and a center star. */
+/* Resultados: 2-column, 3-row stats grid with dividers and stars at crossings. */
 
-/* The cross lines sit behind the stats; the star covers the crossing. */
+/* Register the counter so the browser can interpolate whole numbers. */
+@property --count {
+    syntax: "<integer>";
+    inherits: false;
+    initial-value: 0;
+}
+
 .stats {
     position: relative;
 }
 
-.stats::before,
+/* The vertical line sits behind the grid; the stars cover its crossings. */
 .stats::after {
     content: "";
     position: absolute;
-    background-color: var(--color-lavender-border);
-}
-
-.stats::before {
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-}
-
-.stats::after {
     top: 0;
     bottom: 0;
     left: 50%;
     width: 1px;
+    background-color: var(--color-lavender-border);
 }
 
 .stats__grid {
@@ -31,11 +27,66 @@
     z-index: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-4);
+    /* Divider rows reuse the space the old row gaps occupied. */
+    grid-template-rows: auto var(--space-4) auto var(--space-4) auto;
+    grid-template-areas:
+        "one two"
+        "line1 line1"
+        "three four"
+        "line2 line2"
+        "five six";
+    column-gap: var(--space-4);
 }
 
 .stat {
     text-align: center;
+}
+
+.stat:nth-child(1) {
+    grid-area: one;
+    --target: 325;
+}
+
+.stat:nth-child(2) {
+    grid-area: two;
+    --target: 6;
+}
+
+.stat:nth-child(3) {
+    grid-area: three;
+    --target: 10;
+}
+
+.stat:nth-child(4) {
+    grid-area: four;
+    --target: 2;
+}
+
+.stat:nth-child(5) {
+    grid-area: five;
+    --target: 10;
+}
+
+.stat:nth-child(6) {
+    grid-area: six;
+    --target: 1;
+}
+
+/* Horizontal dividers sit in the empty rows between stat rows. */
+.stats__grid::before,
+.stats__grid::after {
+    content: "";
+    align-self: center;
+    height: 1px;
+    background-color: var(--color-lavender-border);
+}
+
+.stats__grid::before {
+    grid-area: line1;
+}
+
+.stats__grid::after {
+    grid-area: line2;
 }
 
 .stat__number {
@@ -51,11 +102,55 @@
 }
 
 .stats__star {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    position: relative;
     z-index: 2;
-    transform: translate(-50%, -50%);
+    place-self: center;
     color: var(--color-primary);
-    font-size: 3rem;
+    font-size: 2rem;
+}
+
+.stats__star--first {
+    grid-area: line1;
+}
+
+.stats__star--second {
+    grid-area: line2;
+}
+
+/* Count up while the stat enters the viewport; plain numbers stay if unsupported. */
+@supports (animation-timeline: view()) {
+    .stat__number {
+        counter-reset: num var(--count);
+        animation: count-up linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 40%;
+    }
+
+    .stat__number::after {
+        content: counter(num);
+    }
+
+    /* Keep the real number for screen readers while the counter is shown. */
+    .stat__number-value {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+}
+
+@keyframes count-up {
+    to {
+        --count: var(--target);
+    }
+}
+
+/* Show the final value immediately when motion is reduced. */
+@media (prefers-reduced-motion: reduce) {
+    .stat__number {
+        animation: none;
+        --count: var(--target);
+    }
 }

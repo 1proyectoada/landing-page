@@ -1,4 +1,12 @@
-/* Marquee: full-bleed scrolling banner used twice on the page. */
+/* Marquee: text banner plus a slower logo strip below the Resultados stats. */
+
+:root {
+    /* Trailing padding must match the gap, or the -50% loop has a jump. */
+    --marquee-gap: var(--space-5);
+    /* Equal boxes keep very wide and compact logos visually balanced. */
+    --marquee-logo-width: calc(var(--space-7) * 2);
+    --marquee-logo-height: var(--space-7);
+}
 
 .marquee {
     overflow: hidden;
@@ -7,11 +15,6 @@
     font-size: 1.25rem;
     font-weight: 600;
     white-space: nowrap;
-}
-
-.marquee--light {
-    background-color: var(--color-white);
-    color: var(--color-primary);
 }
 
 .marquee__track {
@@ -23,8 +26,25 @@
 .marquee__group {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
-    padding-right: var(--space-2);
+    gap: var(--marquee-gap);
+    padding-right: var(--marquee-gap);
+}
+
+/* Slower left-to-right logo strip shown at full color below the stats. */
+.marquee--stats {
+    margin-top: var(--space-6);
+    background-color: var(--color-primary);
+}
+
+.marquee--stats .marquee__track {
+    animation-duration: 40s;
+    animation-direction: reverse;
+}
+
+.marquee__logo {
+    width: var(--marquee-logo-width);
+    height: var(--marquee-logo-height);
+    object-fit: contain;
 }
 
 @keyframes marquee {
