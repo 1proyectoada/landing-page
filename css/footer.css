@@ -12,11 +12,14 @@
     color: var(--color-white);
 }
 
+/* The PNG is already tightly cropped at 6:1, so display it at its
+   intrinsic ratio instead of restyling it as text. */
 .footer__logo {
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 12rem;
+    aspect-ratio: 1800 / 300;
 }
 
 .footer__tagline {

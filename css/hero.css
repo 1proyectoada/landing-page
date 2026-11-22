@@ -19,16 +19,14 @@
     justify-content: center;
 }
 
-/* The PNG has transparent bands above and below the wordmark. Cropping
-   with object-fit keeps the asset untouched and removes that empty space. */
+/* The PNG is already tightly cropped at 6:1, so show it at its intrinsic
+   ratio without object-fit; cropping would cut off parts of the wordmark. */
 .hero__logo {
     display: block;
     width: 100%;
     height: auto;
     max-width: 21rem;
-    aspect-ratio: 2811 / 530;
-    object-fit: cover;
-    object-position: center;
+    aspect-ratio: 1800 / 300;
 }
 
 .hero__subtitle {
