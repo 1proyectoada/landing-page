@@ -1,5 +1,13 @@
 /* Hero: page title, subtitle, and primary call to action. */
 
+/* Registering the angle lets the conic gradient animate smoothly, so the
+   glow can rotate without spinning (and tilting) the pill-shaped element. */
+@property --glow-angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
 .hero {
     margin-top: var(--space-6);
     margin-bottom: var(--space-5);
@@ -38,10 +46,82 @@
     line-height: 1.5;
 }
 
+/* Each line types separately so the reveal follows the text instead of
+   reflowing a wrapped paragraph. Keyword interpolation lets width grow to
+   the line's intrinsic max-content size. */
+.hero__type-line {
+    --type-duration: 0.9s;
+    display: block;
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    interpolate-size: allow-keywords;
+    /* A border sits on the element's moving right edge, so the cursor tracks
+       the character being typed instead of waiting after the full line. */
+    border-right: 0.6em solid currentColor;
+    animation:
+        hero-type var(--type-duration) steps(var(--chars)) var(--type-delay) both,
+        hero-caret-on 0s linear var(--type-delay) both,
+        hero-caret-blink 0.7s steps(1) infinite,
+        hero-caret-off 0s linear calc(var(--type-delay) + var(--type-duration)) forwards;
+}
+
+.hero__type-line:nth-child(1) {
+    --chars: 22;
+    --type-delay: 0.3s;
+}
+
+.hero__type-line:nth-child(2) {
+    --chars: 22;
+    --type-delay: 1.3s;
+}
+
+.hero__type-line:nth-child(3) {
+    --chars: 22;
+    --type-delay: 2.3s;
+}
+
+.hero__type-line:nth-child(4) {
+    --chars: 25;
+    --type-delay: 3.3s;
+}
+
 .hero__cta-wrap {
+    position: relative;
+    isolation: isolate;
     margin-top: var(--space-4);
     margin-bottom: var(--space-7);
     padding: var(--space-1);
+}
+
+/* The glows sit behind the button and inherit its pill outline; only the
+   gradient angle moves, keeping the halo a constant shape. */
+.hero__cta-wrap::before {
+    content: "";
+    position: absolute;
+    inset: calc(var(--space-1) * -1);
+    z-index: -1;
+    border-radius: var(--radius-pill);
+    background: conic-gradient(from var(--glow-angle),
+        transparent, color-mix(in srgb, var(--color-primary) 75%, transparent), transparent,
+        var(--color-accent), transparent);
+    filter: blur(var(--space-3));
+    pointer-events: none;
+    animation: hero-glow-spin 6s linear infinite;
+}
+
+/* A wider, slower lavender layer contrasts the primary glow as it drifts. */
+.hero__cta-wrap::after {
+    content: "";
+    position: absolute;
+    inset: calc(var(--space-2) * -1);
+    z-index: -2;
+    border-radius: var(--radius-pill);
+    background: conic-gradient(from var(--glow-angle),
+        transparent, var(--color-lavender-border), transparent);
+    filter: blur(var(--space-4));
+    pointer-events: none;
+    animation: hero-glow-spin 12s linear infinite;
 }
 
 .hero__cta {
@@ -52,7 +132,6 @@
     min-height: var(--tap-target-large);
     padding: var(--space-2) var(--space-2) var(--space-2) var(--space-3);
     background-color: var(--color-primary);
-    box-shadow: 0 0 40px 8px color-mix(in srgb, var(--color-primary) 40%, transparent);
     border-radius: var(--radius-pill);
     color: var(--color-white);
     font-weight: 600;
@@ -67,4 +146,56 @@
     background-color: var(--color-white);
     border-radius: 50%;
     color: var(--color-primary);
+}
+
+@keyframes hero-glow-spin {
+    to {
+        --glow-angle: 360deg;
+    }
+}
+
+@keyframes hero-type {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: max-content;
+    }
+}
+
+@keyframes hero-caret-on {
+    from {
+        border-right-width: 0;
+    }
+
+    to {
+        border-right-width: 0.6em;
+    }
+}
+
+@keyframes hero-caret-blink {
+    50% {
+        border-right-color: transparent;
+    }
+}
+
+@keyframes hero-caret-off {
+    to {
+        border-right-width: 0;
+    }
+}
+
+/* Respect users who prefer less motion; show the text and glows but still. */
+@media (prefers-reduced-motion: reduce) {
+    .hero__cta-wrap::before,
+    .hero__cta-wrap::after {
+        animation: none;
+    }
+
+    .hero__type-line {
+        animation: none;
+        width: auto;
+        border-right: 0;
+    }
 }
