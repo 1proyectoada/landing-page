@@ -89,6 +89,16 @@
     margin-top: var(--space-1);
 }
 
+/* Links inside answers stand out from the black body copy. */
+.faq__answer a {
+    color: var(--color-primary);
+}
+
+.faq__answer a:hover,
+.faq__answer a:focus {
+    text-decoration: underline;
+}
+
 /* Respect users who prefer less motion. */
 @media (prefers-reduced-motion: reduce) {
 
