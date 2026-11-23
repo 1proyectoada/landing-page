@@ -1,39 +1,163 @@
-/* Nosotras: alternating text and portrait blocks. */
+/* Nosotras: white intro followed by a borderless content block. */
 
-.about {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
+/* Shared block heading; h2 styling comes from .section-title. */
+.block-title {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.1;
 }
 
-.about__block {
+.block-copy {
+    margin-top: var(--space-2);
+    line-height: 1.6;
+}
+
+/* Matching the container's 20px sides keeps block text aligned with the intro. */
+.sky {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+    padding: var(--space-4) var(--space-20);
+}
+
+/* Three dot layers with different sizes, offsets and strengths read as random. */
+.sky::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+        radial-gradient(circle, color-mix(in srgb, var(--color-primary) 35%, transparent) 1px, transparent 1.5px),
+        radial-gradient(circle, color-mix(in srgb, var(--color-primary) 22%, transparent) 1px, transparent 1.5px),
+        radial-gradient(circle, color-mix(in srgb, var(--color-primary) 12%, transparent) 1px, transparent 1.5px);
+    background-size: 90px 90px, 140px 140px, 210px 210px;
+    background-position: 0 0, 35px 60px, 110px 25px;
+}
+
+.sky__star {
+    position: absolute;
+    font-size: 1.25rem;
+    color: var(--color-lavender);
+    pointer-events: none;
+}
+
+/* Stars sit in the 20px side channels, never over text. */
+.sky__star--one {
+    top: var(--space-1);
+    right: 0;
+}
+
+.sky__star--two {
+    top: 42%;
+    left: 0;
+}
+
+.sky__star--three {
+    top: 74%;
+    right: 0;
+}
+
+.sky__block + .sky__block {
+    margin-top: var(--space-6);
+}
+
+/* These two blocks read from the right edge while keeping Spanish punctuation order. */
+.about-flight,
+.about-idea {
+    text-align: right;
+}
+
+/* Ada's portrait follows the paragraph instead of sitting beside it. */
+.about-ada {
     display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.about-ada__text {
+    width: 100%;
+}
+
+/* Tightens the intro-to-Ada gap without changing other block spacing. */
+.about-ada__text .block-copy {
+    margin-top: var(--space-1);
+}
+
+/* Matches FAQ links so in-copy references read as interactive. */
+.about-ada__text a {
+    color: var(--color-primary);
+}
+
+.about-ada__text a:hover,
+.about-ada__text a:focus {
+    text-decoration: underline;
+}
+
+.about-ada__image {
+    width: 55%;
+    max-width: 220px;
+    aspect-ratio: 2 / 3;
+    border-radius: 50%;
+    margin-inline: auto;
+}
+
+/* Last idea paragraph sits on the right of an empty image slot. */
+.about-team-row {
+    display: flex;
+    flex-direction: row-reverse;
     align-items: center;
     gap: var(--space-2);
 }
 
-.about__block--reverse {
-    flex-direction: row-reverse;
-    text-align: right;
+/* Inherits right alignment from .about-idea; only the column share is set here. */
+.about-team-row .block-copy {
+    flex: 3 1 60%;
 }
 
-.about__text {
-    flex: 3;
-}
-
-.about__image {
-    flex: 2;
+.about-team__image {
+    flex: 2 1 40%;
     aspect-ratio: 2 / 3;
     border-radius: 50%;
 }
 
-.about__subtitle {
-    color: var(--color-primary);
-    font-size: 1.125rem;
-    font-weight: 700;
+/* Two aligned columns keep each pair of members on the same row. */
+.team-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4) var(--space-2);
+    margin-top: var(--space-3);
+    padding-bottom: var(--space-2);
 }
 
-.about__paragraph {
+/* figure defaults to 1em 40px and the base reset does not cover it. */
+.team-member {
+    margin: 0;
+    text-align: center;
+}
+
+.team-member__photo {
+    display: block;
+    width: 85%;
+    /* Overrides the HTML height attribute so aspect-ratio keeps the circle square. */
+    height: auto;
+    margin-inline: auto;
+    aspect-ratio: 1 / 1;
+    border: var(--team-ring-width) solid var(--color-lavender-border);
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.team-member__caption {
+    display: flex;
+    flex-direction: column;
     margin-top: var(--space-1);
-    line-height: 1.6;
+}
+
+.team-member__name {
+    font-weight: 700;
 }
