@@ -1,0 +1,70 @@
+/* Sparkles: desktop-only pointer trail rendered above page content. */
+
+.sparkle-layer {
+    position: fixed;
+    inset: 0;
+    /* Above normal content but below the mobile menu overlay. */
+    z-index: 900;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.sparkle {
+    --sparkle-x: 0px;
+    --sparkle-y: 0px;
+    --sparkle-fall: var(--space-1);
+    --sparkle-size: var(--space-1);
+    --sparkle-rotate: 0deg;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* Center the glyph on the pointer without affecting its animation transform. */
+    margin-top: calc(var(--sparkle-size) * -0.5);
+    margin-left: calc(var(--sparkle-size) * -0.5);
+    color: var(--color-primary);
+    font-size: var(--sparkle-size);
+    font-weight: 700;
+    line-height: 1;
+    opacity: 0;
+    animation: sparkle-drop 0.75s ease-out forwards;
+    will-change: transform, opacity;
+}
+
+/* Three brand shades keep the trail lively without introducing new colors. */
+.sparkle:nth-child(3n + 1) {
+    color: var(--color-primary);
+}
+
+.sparkle:nth-child(3n + 2) {
+    color: var(--color-accent);
+}
+
+.sparkle:nth-child(3n) {
+    color: var(--color-lavender);
+}
+
+@keyframes sparkle-drop {
+    0% {
+        opacity: 0;
+        transform: translate3d(var(--sparkle-x), var(--sparkle-y), 0) scale(0.4) rotate(0deg);
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translate3d(var(--sparkle-x), calc(var(--sparkle-y) + var(--sparkle-fall)), 0)
+            scale(1) rotate(var(--sparkle-rotate));
+    }
+}
+
+/* Safety net: the script also skips these environments. */
+@media (max-width: 1023px), (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+    .sparkle-layer {
+        display: none;
+    }
+}
