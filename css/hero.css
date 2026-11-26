@@ -35,6 +35,8 @@
     height: auto;
     max-width: 21rem;
     aspect-ratio: 1800 / 300;
+    /* One-shot load entrance; transform keeps the wordmark's layout box stable. */
+    animation: hero-logo-pop 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
 }
 
 .hero__subtitle {
@@ -154,6 +156,19 @@
     }
 }
 
+/* Small pop on load, then settles at full size. */
+@keyframes hero-logo-pop {
+    from {
+        opacity: 0;
+        transform: scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 @keyframes hero-type {
     from {
         width: 0;
@@ -204,6 +219,11 @@
 @media (prefers-reduced-motion: reduce) {
     .hero__cta-wrap::before,
     .hero__cta-wrap::after {
+        animation: none;
+    }
+
+    /* Show the wordmark immediately without the load pop. */
+    .hero__logo {
         animation: none;
     }
 

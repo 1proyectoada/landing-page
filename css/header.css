@@ -194,5 +194,20 @@
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.04em;
+        transition: color 0.2s ease;
+    }
+}
+
+/* Pointer-only hover keeps touch devices free of stuck hover states. */
+@media (min-width: 1024px) and (hover: hover) {
+    .site-nav__link:hover {
+        color: var(--color-black);
+    }
+}
+
+/* Placed last so the reduced-motion preference wins over the desktop transition. */
+@media (prefers-reduced-motion: reduce) {
+    .site-nav__link {
+        transition: none;
     }
 }
