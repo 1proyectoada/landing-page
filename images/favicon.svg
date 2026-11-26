@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <!-- White tile keeps the purple star visible on light and dark browser tabs. -->
+    <rect width="24" height="24" rx="5" fill="#ffffff" />
+    <!-- Same path as the inline .star logo; colors are literal because variables cannot cross into this file. -->
+    <path transform="translate(1.5 1.5) scale(0.875)"
+        d="M12 0c0 6.627-5.373 12-12 12 6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12z"
+        fill="#7447e1" />
+</svg>
