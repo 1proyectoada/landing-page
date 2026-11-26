@@ -108,3 +108,16 @@
         transition: none;
     }
 }
+
+/* Desktop: the title stays full width while the accordion is centered. */
+@media (min-width: 1024px) {
+    /* Capping only the list leaves the heading aligned with the other sections. */
+    .faq-list {
+        max-width: 70ch;
+        margin-inline: auto;
+    }
+
+    .faq__answer {
+        max-width: 70ch;
+    }
+}

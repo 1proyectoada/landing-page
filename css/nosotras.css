@@ -161,3 +161,78 @@
 .team-member__name {
     font-weight: 700;
 }
+
+/* Desktop: two columns share the dotted backdrop without changing the mobile DOM. */
+@media (min-width: 1024px) {
+    #nosotras {
+        position: relative;
+        isolation: isolate;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+        grid-template-areas:
+            "title title"
+            "intro team"
+            "ada team";
+        /* Keep the intro row at its content height so the taller team grid cannot
+           push the Ada paragraph down and open a gap between the two text blocks. */
+        grid-template-rows: auto min-content 1fr;
+        align-items: start;
+        column-gap: var(--space-6);
+        padding-inline: var(--space-4);
+    }
+
+    /* The pattern moves to the section so both columns sit on the dots. */
+    #nosotras::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background-image:
+            radial-gradient(circle, color-mix(in srgb, var(--color-primary) 35%, transparent) 1px, transparent 1.5px),
+            radial-gradient(circle, color-mix(in srgb, var(--color-primary) 22%, transparent) 1px, transparent 1.5px),
+            radial-gradient(circle, color-mix(in srgb, var(--color-primary) 12%, transparent) 1px, transparent 1.5px);
+        background-size: 90px 90px, 140px 140px, 210px 210px;
+        background-position: 0 0, 35px 60px, 110px 25px;
+    }
+
+    /* Flatten the existing wrappers so their children become grid items. */
+    #nosotras > .container,
+    .sky {
+        display: contents;
+    }
+
+    #nosotras .section-title {
+        grid-area: title;
+    }
+
+    .about-intro {
+        grid-area: intro;
+    }
+
+    .about-ada {
+        grid-area: ada;
+    }
+
+    .sky__block:last-child {
+        grid-area: team;
+    }
+
+    /* Stacked spacing no longer applies once the blocks sit side by side. */
+    .sky__block + .sky__block {
+        margin-top: 0;
+    }
+
+    /* Long copy stays readable instead of stretching across the viewport. */
+    .block-copy {
+        max-width: 70ch;
+    }
+
+    .team-list {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .team-member__photo {
+        width: 100%;
+        max-width: 7rem;
+    }
+}

@@ -127,3 +127,42 @@
         --count: var(--target);
     }
 }
+
+/* Desktop: one row of four stats; the vertical divider still marks the middle. */
+@media (min-width: 1024px) {
+    .stats__grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+        grid-template-areas: "one two three four";
+    }
+
+    /* Fill the two empty gutters; the middle gutter already has .stats::after. */
+    .stat {
+        position: relative;
+    }
+
+    .stat:nth-child(2)::before,
+    .stat:nth-child(4)::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: calc(var(--space-4) / -2);
+        width: 1px;
+        background-color: var(--color-lavender-border);
+    }
+
+    /* The horizontal rule belongs to the stacked 2x2 layout only. */
+    .stats__grid::before {
+        display: none;
+    }
+
+    /* Absolute positioning avoids creating an implicit grid area at desktop. */
+    .stats__star {
+        grid-area: auto;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

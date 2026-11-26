@@ -72,6 +72,8 @@ button {
     --card-border-width: 10px;
     /* Thin ring around the team photo placeholders. */
     --team-ring-width: 3px;
+    /* Reserved so the CTA hover border never shifts the layout. */
+    --cta-border-width: 1px;
     /* Inner curve matches the card's outer radius minus its white border. */
     --radius-card-inner: calc(var(--radius-block) - var(--card-border-width));
     --shadow-header: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -118,4 +120,15 @@ button:focus-visible,
 summary:focus-visible {
     outline: 3px solid var(--color-black);
     outline-offset: 3px;
+}
+
+/* Desktop: sections keep their full-bleed backgrounds and now fill the viewport. */
+@media (min-width: 1024px) {
+    :root {
+        --content-max-width: none;
+    }
+
+    .container {
+        padding-inline: var(--space-4);
+    }
 }

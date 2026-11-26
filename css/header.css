@@ -23,6 +23,18 @@
     font-size: 2rem;
 }
 
+/* Mobile keeps the compact star; the full wordmark appears at the breakpoint. */
+.site-header__logo {
+    display: none;
+    width: auto;
+    height: 2rem;
+}
+
+/* Desktop nav stays out of the mobile flow until the breakpoint. */
+.site-nav {
+    display: none;
+}
+
 .menu-open {
     display: grid;
     place-items: center;
@@ -140,5 +152,47 @@
     .menu:target {
         animation: none;
         transition: none;
+    }
+}
+
+/* Desktop: one full-width bar with every option visible inline. */
+@media (min-width: 1024px) {
+    /* The bar is already full-bleed; let its contents span the viewport too. */
+    .site-header__inner {
+        max-width: none;
+        padding-inline: var(--space-4);
+    }
+
+    /* Hide the mobile overlay even when the URL still holds #menu. */
+    .menu-open,
+    .menu,
+    .menu:target {
+        display: none;
+    }
+
+    .site-header__mark {
+        display: none;
+    }
+
+    /* The PNG is a tight 6:1 wordmark; sizing by height keeps it uncropped. */
+    .site-header__logo {
+        display: block;
+    }
+
+    .site-nav {
+        display: flex;
+        align-items: center;
+        gap: var(--space-1);
+    }
+
+    .site-nav__link {
+        display: flex;
+        align-items: center;
+        min-height: var(--tap-target);
+        padding-inline: var(--space-1);
+        color: var(--color-primary);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
     }
 }

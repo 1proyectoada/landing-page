@@ -89,3 +89,17 @@
     font-weight: 600;
     text-align: center;
 }
+
+/* Desktop: two cards per row once the workshops are published. */
+@media (min-width: 1024px) {
+    .workshops {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-6) var(--space-4);
+    }
+
+    /* The placeholder is the only card for now, so it keeps the full row. */
+    .workshops-empty {
+        grid-column: 1 / -1;
+    }
+}

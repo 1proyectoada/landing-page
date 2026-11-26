@@ -186,6 +186,20 @@
     }
 }
 
+/* Hover feedback only where a pointer can actually hover. */
+@media (min-width: 1024px) and (hover: hover) {
+    .hero__cta {
+        /* Transparent at rest so the hover border does not shift the layout. */
+        border: var(--cta-border-width) solid transparent;
+        transition: transform 0.4s ease, border-color 0.4s ease;
+    }
+
+    .hero__cta:hover {
+        transform: scale(1.1);
+        border-color: var(--color-white-border);
+    }
+}
+
 /* Respect users who prefer less motion; show the text and glows but still. */
 @media (prefers-reduced-motion: reduce) {
     .hero__cta-wrap::before,
@@ -197,5 +211,42 @@
         animation: none;
         width: auto;
         border-right: 0;
+    }
+
+    /* Keep the color change, but skip the scaling and easing. */
+    .hero__cta {
+        transition: none;
+    }
+
+    .hero__cta:hover {
+        transform: none;
+    }
+}
+
+/* Desktop hero: a larger wordmark and subtitle, with a tighter CTA. */
+@media (min-width: 1024px) {
+    /* Pull the first marquee closer without changing mobile spacing. */
+    .hero {
+        margin-bottom: var(--space-4);
+    }
+
+    .hero__logo {
+        max-width: 32rem;
+    }
+
+    .hero__subtitle {
+        max-width: 40ch;
+        margin-top: var(--space-3);
+        font-size: 1.25rem;
+    }
+
+    .hero__cta {
+        gap: var(--space-1);
+        padding-left: var(--space-2);
+    }
+
+    .hero__cta .icon {
+        width: 1.5rem;
+        height: 1.5rem;
     }
 }

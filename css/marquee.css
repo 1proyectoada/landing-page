@@ -59,3 +59,33 @@
         animation: none;
     }
 }
+
+/* Desktop: the opening banner grows; the stats strip becomes a static centered row. */
+@media (min-width: 1024px) {
+    .marquee--primary {
+        /* One variable feeds both gap and trailing padding, so the loop stays seamless. */
+        --marquee-gap: var(--space-5);
+        padding-block: var(--space-6);
+        font-size: 1.75rem;
+    }
+
+    /* Wider gaps replace the loop with one balanced row of company logos. */
+    .marquee--stats {
+        --marquee-gap: var(--space-7);
+    }
+
+    .marquee--stats .marquee__track {
+        width: 100%;
+        animation: none;
+        justify-content: center;
+    }
+
+    /* Trailing padding exists only to keep the mobile duplicate loop seamless. */
+    .marquee--stats .marquee__group {
+        padding-right: 0;
+    }
+
+    .marquee--stats .marquee__group[aria-hidden="true"] {
+        display: none;
+    }
+}

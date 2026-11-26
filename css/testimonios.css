@@ -38,3 +38,10 @@
     aspect-ratio: 16 / 10;
     border-radius: var(--radius-card);
 }
+
+/* Desktop: show several cards at once while keeping the scroll-snap carousel. */
+@media (min-width: 1024px) {
+    .testimonial-card {
+        flex-basis: 40%;
+    }
+}

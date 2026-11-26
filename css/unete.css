@@ -152,3 +152,64 @@
         opacity: 1;
     }
 }
+
+/* Desktop: the pieces interlock side to side instead of stacking. */
+@media (min-width: 1024px) {
+    .join-cards {
+        flex-direction: row;
+        align-items: stretch;
+        padding-block: 0;
+    }
+
+    .join-card {
+        flex: 1 1 0;
+    }
+
+    .join-card + .join-card {
+        margin-top: 0;
+        margin-left: var(--piece-gap);
+    }
+
+    /* Side tabs replace the stacked layout's top knob and bottom notch. */
+    .join-card__body {
+        height: 100%;
+        -webkit-mask: none;
+        mask: none;
+    }
+
+    .join-card::before,
+    .join-card::after {
+        z-index: 1;
+    }
+
+    .join-card::before {
+        top: 50%;
+        left: auto;
+        right: 0;
+        transform: translate(50%, -50%);
+    }
+
+    /* Earlier pieces paint above later ones so their tabs stay visible. */
+    .join-card--primary {
+        z-index: 3;
+    }
+
+    .join-card--lavender {
+        z-index: 2;
+    }
+
+    .join-card--accent {
+        z-index: 1;
+    }
+
+    .join-card--primary::after,
+    .join-card--accent::before {
+        display: none;
+    }
+
+    .join-card--lavender::after {
+        left: 0;
+        right: auto;
+        transform: translate(-50%, -50%);
+    }
+}
